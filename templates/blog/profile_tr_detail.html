@@ -1,0 +1,18 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}{{ bb.title }} - Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col">
+            <h2>{{ tr.title }}</h2>
+            <p>{{ tr.content }}</p>
+            <p class="font-weight-bold">{{ tr.price }} руб.</p>
+            <p>{{ tr.contacts }}</p>
+            <p class="text-right font-italic">Добавлено {{ tr.created_at }}</p>
+        </div>
+    </div>
+</div>
+<p><a href="{% url 'blog:profile' %}">Назад</a></p>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "layout/basic.html" %}
+
+{#{% load thumbnail %}#}
+{#{% load static %}#}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<h2>Профиль пользователя {{ user.username }}</h2>
+{% if user.first_name and user.last_name %}
+<p>Здравствуйте, {{ user.first_name }} {{ user.last_name }}!</p>
+{% else %}
+<p>Здравствуйте!</p>
+{% endif %}
+<p><a href="{% url 'blog:profile_tr_add' %}">Записаться на тренировку </a></p>
+{% if trs %}
+<h3>Ваши тренировки</h3>
+<ul class="list-unstyled">
+    {% for tr in trs %}
+    <li class="media my-5 p-3 border">
+        {% url 'blog:profile_tr_detail' pk=tr.pk as url %}
+        <a href="{{ url }}{{ all }}"> </a>
+        <div class="media-body">
+          <h3><a href="{{ url }}{{ all }}">
+          {{ tr.title }}</a></h3>
+          <div>{{ tr.content }}</div>
+          <p class="text-right font-weight-bold">{{ tr.price }} руб.</p>
+          <p class="text-right font-italic">{{ tr.created_at }}</p>
+          <p class="text-right mt-2">
+            <a href="{% url 'blog:profile_tr_change' pk=tr.pk %}">Исправить</a>
+            <a href="{% url 'blog:profile_tr_delete' pk=tr.pk %}">Удалить</a>
+          </p>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

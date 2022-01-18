@@ -1,0 +1,85 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>{% block title %}Главная :: {% endblock %}</title>#}
+{#</head>#}
+{#<body>#}
+{#<header>#}
+{#    <h1>Услуги Фитнес Тренерa:</h1>#}
+{#</header>#}
+{##}
+{#<nav>#}
+{#    <a href="{% url 'index' %}"> Главная </a>#}
+{#    {% for format in formats %}#}
+{#        <a href="{% url 'by_format' format.pk %}"> {{ format.title }} </a>#}
+{#    {% endfor %}#}
+{#</nav>#}
+{#<section>#}
+{#    {% block content %}#}
+{#    {% endblock %}#}
+{#</section>#}
+{#</body>#}
+{#</html>#}
+
+{#{% load bootstrap4 %}#}
+{#{% load static %}#}
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Главная{% endblock %} - Фитнес тренировки </title>
+{#        {% bootstrap_css %}#}
+{#        <link rel="stylesheet" type="text/css"#}
+{#        href="{% static 'blog/style.css' %}">#}
+{#        {% bootstrap_javascript jquery='slim' %}#}
+    </head>
+    <body class="container-fluid">
+        <header class="mb-4">
+            <h1 class="display-1 text-center"> Фитнес тренировки </h1>
+        </header>
+        <div class="row">
+            <ul class="col nav justify-content-end border">
+                <li class="nav-item"><a class="nav-link"
+                href="{% url 'blog:register' %}">Регистрация</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown"
+                    href="#" role="button" aria-haspopup="true"
+                    aria-expanded="false">Профиль</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{% url 'blog:profile' %}">Мои тренировки</a>
+                        <a class="dropdown-item" href="{% url 'blog:profile_change' %}">Изменить личные
+                        данные</a>
+                        <a class="dropdown-item" href="{% url 'blog:password_change' %}">Изменить пароль</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'blog:logout' %}">Выйти</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'blog:profile_delete' %}">Удалить</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'blog:login' %}">Вход</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="row">
+            <nav class="col-md-auto nav flex-column border">
+                <a class="nav-link root"
+                href="{% url 'blog:index' %}">Главная</a>
+{#                <a class="nav-link root" href="{% url 'blog:other' page='about' %}">#}
+{#                О сайте</a>#}
+            </nav>
+            <section class="col border py-2">
+{#                {% bootstrap_messages %}#}
+                {% block content %}
+                {% endblock %}
+            </section>
+        </div>
+{#        <footer class="mt-3">#}
+{#            <p class="text-right font-italic">&copy; читатели.</p>#}
+{#        </footer>#}
+    </body>
+</html>

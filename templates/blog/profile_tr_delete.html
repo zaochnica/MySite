@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Удаление тренировки - Профиль пользователя{% endblock %}
+
+{% block content %}
+<h2>Удаление тренировки</h2>
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col">
+            <h2>{{ tr.title }}</h2>
+            <p>{{ tr.content }}</p>
+            <p class="font-weight-bold">{{ tr.price }} руб.</p>
+            <p class="text-right font-italic">Добавлено {{ tr.created_at }}</p>
+        </div>
+    </div>
+</div>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Удалить">
+</form>
+{% endblock %}

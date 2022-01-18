@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+
+{% block content %}
+    {% for tr in trs %}
+        <div><h2>{{ tr.title }} </h2>
+            <p>{{ tr.content }}</p>
+            <p>{{ tr.price }} </p>
+            <p>
+                <a href="/blog/{{ tr.format.pk }}/">{{ format.title }} </a>
+            </p>
+            <p> {{ tr.date_created }} </p>
+        </div>
+    {% endfor %}
+{% endblock %}
